@@ -5,18 +5,35 @@
 
 
 def artcode_i(s):
-    """retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme itératif
+    """
+    Retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme itératif.
 
     Args:
-        s (str): la chaîne de caractères à encoder
+        s (str): La chaîne de caractères à encoder.
 
     Returns:
-        list: la liste des tuples (caractère, nombre d'occurences)
+        list: La liste des tuples (caractère, nombre d'occurrences consécutives).
     """
+    if not s:
+        return []
     
-    # votre code ici
+    result = []
+    c = s[0]
+    nb = 1
 
-    return [ ]
+    for char in s[1:]:
+        if char == c:
+            nb += 1
+        else:
+            result.append((c, nb))
+            c = char
+            nb = 1
+    
+    # Ajouter la dernière séquence de caractères
+    result.append((c, nb))
+    
+    return result
+
 
 
 def artcode_r(s):
@@ -32,10 +49,15 @@ def artcode_r(s):
     # votre code ici
 
     # cas de base
+    if(not s):
+        return []
     # recherche nombre de caractères identiques au premier
+    count = 1
+    while count < len(s) and s[0] == s[count]:
+        count += 1
     # appel récursif
-
-    return []
+    
+    return [(s[0], count)] + artcode_r(s[count:])
     
 
 #### Fonction principale
